@@ -2,7 +2,7 @@ package com.tea.kotlin
 
 import kotlinx.coroutines.*
 
-class Runtime<Model, Msg>(
+class Runtime<Model : Any, Msg>(
     init: () -> Pair<Model, List<() -> Msg>>,
     private val view: (Model, (Msg) -> Unit) -> Unit,
     private val update: (Model, Msg) -> Pair<Model, List<() -> Msg>>,
@@ -11,8 +11,7 @@ class Runtime<Model, Msg>(
 
     private val scope = MainScope()
     private var isRunning = true
-    private var state: Model? = null
-    //TODO: nullable
+    private lateinit var state: Model
 
     init {
         change(init())
@@ -24,22 +23,18 @@ class Runtime<Model, Msg>(
             commandRunner(command, ::dispatch)
         }
 
-        state?.let { model ->
-            view(model, ::dispatch)
-        }
+        view(state, ::dispatch)
     }
 
     private fun dispatch(message: Msg) {
-        state?.let {
-            change(update(it, message))
-        }
+        change(update(state, message))
     }
 
     fun stop() {
         if (isRunning) {
             isRunning = false
             scope.cancel()
-            done?.let { state?.let(it) }
+            done?.invoke(state)
         }
     }
 
