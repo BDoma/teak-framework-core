@@ -40,9 +40,7 @@ class Runtime<Model : Any, Msg>(
 
     private fun commandRunner(command: () -> Msg, dispatch: (Msg) -> Unit) {
         scope.launch(Dispatchers.IO) {
-            val result = withContext(Dispatchers.IO){
-                command()
-            }
+            val result = command()
             launch(Dispatchers.Main) {
                 dispatch(result)
             }
