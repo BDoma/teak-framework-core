@@ -27,7 +27,9 @@ class Runtime<Model : Any, Msg>(
     }
 
     private fun dispatch(message: Msg) {
-        change(update(state, message))
+        if (isRunning) {
+            change(update(state, message))
+        }
     }
 
     fun stop() {
