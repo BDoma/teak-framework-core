@@ -4,7 +4,7 @@ import teak.framework.core.runtime.TeakRuntime
 import teak.framework.core.TeakComponentContract.*
 
 
-class TeakComponent<Model : Any, Msg>(private val implementation: Impl<Model, Msg>) {
+class TeakComponent<Model : Any, Msg: Any>(private val implementation: Impl<Model, Msg>) {
 
     private lateinit var teakRuntime: TeakRuntime<Model, Msg>
     private lateinit var updater: Updater<Model, Msg>
