@@ -1,8 +1,7 @@
 package com.tea.kotlin
 
 import com.tea.kotlin.runtime.TeakRuntime
-import com.tea.kotlin.helper.Initializer
-import com.tea.kotlin.helper.Updater
+import com.tea.kotlin.TeakComponentContract.*
 
 
 class TeakComponent<Model : Any, Msg>(private val implementation: Impl<Model, Msg>) {
@@ -42,11 +41,5 @@ class TeakComponent<Model : Any, Msg>(private val implementation: Impl<Model, Ms
     private fun view(model: Model, dispatch: (Msg) -> Unit) {
         implementation.view(model)
         dispatcher = dispatch
-    }
-
-    interface Impl<Model : Any, Msg> {
-        fun initializer(): Initializer<Model, Msg>
-        fun view(model: Model)
-        fun updater(): Updater<Model, Msg>
     }
 }
