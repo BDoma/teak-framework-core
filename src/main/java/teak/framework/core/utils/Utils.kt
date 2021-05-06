@@ -1,4 +1,4 @@
-package com.tea.kotlin.helper
+package teak.framework.core.utils
 
 fun <Model, Msg> pair(
     model: Model,

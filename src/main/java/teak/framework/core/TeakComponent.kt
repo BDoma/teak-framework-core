@@ -1,7 +1,7 @@
-package com.tea.kotlin
+package teak.framework.core
 
-import com.tea.kotlin.runtime.TeakRuntime
-import com.tea.kotlin.TeakComponentContract.*
+import teak.framework.core.runtime.TeakRuntime
+import teak.framework.core.TeakComponentContract.*
 
 
 class TeakComponent<Model : Any, Msg>(private val implementation: Impl<Model, Msg>) {

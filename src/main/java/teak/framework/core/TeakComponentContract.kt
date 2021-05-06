@@ -1,4 +1,4 @@
-package com.tea.kotlin
+package teak.framework.core
 
 interface TeakComponentContract {
     interface Initializer<Model, Msg> {
