@@ -1,8 +1,8 @@
-package com.tea.kotlin
+package com.tea.kotlin.runtime
 
 import kotlinx.coroutines.*
 
-class Runtime<Model : Any, Msg>(
+class TeakRuntime<Model : Any, Msg>(
     init: () -> Pair<Model, List<() -> Msg>>,
     private val view: (Model, (Msg) -> Unit) -> Unit,
     private val update: (Model, Msg) -> Pair<Model, List<() -> Msg>>,
@@ -27,9 +27,7 @@ class Runtime<Model : Any, Msg>(
     }
 
     private fun dispatch(message: Msg) {
-        if (isRunning) {
-            change(update(state, message))
-        }
+        change(update(state, message))
     }
 
     fun stop() {
