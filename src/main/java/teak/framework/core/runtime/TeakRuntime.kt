@@ -41,7 +41,7 @@ class TeakRuntime<Model : Any, Msg>(
     private fun commandRunner(command: () -> Msg, dispatch: (Msg) -> Unit) {
         scope.launch(Dispatchers.IO) {
             val result = command()
-            launch(Dispatchers.Main) {
+            withContext(Dispatchers.Main) {
                 dispatch(result)
             }
         }
