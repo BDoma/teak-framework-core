@@ -6,10 +6,9 @@ class TeakRuntime<Model : Any, Msg>(
     init: () -> Pair<Model, List<() -> Msg>>,
     private val view: (Model, (Msg) -> Unit) -> Unit,
     private val update: (Model, Msg) -> Pair<Model, List<() -> Msg>>,
+    private val scope: CoroutineScope = MainScope(),
     private val done: ((Model) -> Unit)? = null
 ) {
-
-    private val scope = MainScope()
     private var isRunning = true
     private lateinit var state: Model
 
